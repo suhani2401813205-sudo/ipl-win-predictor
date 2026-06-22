@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPL Win Predictor</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #E8E8F0; min-height: 100vh; padding: 40px 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 8px; }
+        p.sub { text-align: center; color: #9898B0; margin-bottom: 30px; }
+        .form-card { background: #16161f; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 13px; margin-bottom: 6px; color: #9898B0; }
+        select, input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #2a2a3d; background: #12121a; color: #E8E8F0; }
+        button { width: 100%; padding: 14px; background: #6C63FF; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        .result { display: none; background: #16161f; border-radius: 16px; padding: 24px; margin-top: 20px; }
+        .prob-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .prob-bar { height: 30px; background: #2a2a3d; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 16px; }
+        .prob-fill1 { background: #6C63FF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+        .prob-fill2 { background: #00D4AA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🏏 IPL Win Predictor</h1>
+    <p class="sub">ML-based match outcome prediction</p>
+
+    <div class="form-card">
+        <div class="form-group">
+            <label>Team 1</label>
+            <select id="team1">
+                <option>Mumbai Indians</option>
+                <option>Chennai Super Kings</option>
+                <option>Royal Challengers Bengaluru</option>
+                <option>Kolkata Knight Riders</option>
+                <option>Sunrisers Hyderabad</option>
+                <option>Punjab Kings</option>
+                <option>Delhi Capitals</option>
+                <option>Rajasthan Royals</option>
+                <option>Gujarat Titans</option>
+                <option>Lucknow Super Giants</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Team 2</label>
+            <select id="team2">
+                <option>Chennai Super Kings</option>
+                <option>Mumbai Indians</option>
+                <option>Royal Challengers Bengaluru</option>
+                <option>Kolkata Knight Riders</option>
+                <option>Sunrisers Hyderabad</option>
+                <option>Punjab Kings</option>
+                <option>Delhi Capitals</option>
+                <option>Rajasthan Royals</option>
+                <option>Gujarat Titans</option>
+                <option>Lucknow Super Giants</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Venue</label>
+            <input type="text" id="venue" value="Wankhede Stadium" placeholder="e.g. Wankhede Stadium">
+        </div>
+        <div class="form-group">
+            <label>Toss Winner</label>
+            <select id="toss_winner">
+                <option>Mumbai Indians</option>
+                <option>Chennai Super Kings</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Toss Decision</label>
+            <select id="toss_decision">
+                <option value="field">Field</option>
+                <option value="bat">Bat</option>
+            </select>
+        </div>
+        <button onclick="predict()">Predict Winner</button>
+    </div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+async function predict() {
+    const team1 = document.getElementById('team1').value;
+    const team2 = document.getElementById('team2').value;
+
+    if (team1 === team2) {
+        alert('Team 1 and Team 2 cannot be the same! Please select different teams.');
+        return;
+    }
+
+    const venue = document.getElementById('venue').value;
+    const toss_winner = document.getElementById('toss_winner').value;
+    const toss_decision = document.getElementById('toss_decision').value;
+
+    const response = await fetch('/predict', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({team1, team2, venue, toss_winner, toss_decision})
+    });
+
+    const data = await response.json();
+    const p = data.prediction;
+
+    document.getElementById('result').innerHTML = `
+        <h3>Prediction Result</h3>
+        <div class="prob-bar">
+            <div class="prob-fill1" style="width:${p.team1_win_probability}%">${p.team1_win_probability}%</div>
+            <div class="prob-fill2" style="width:${p.team2_win_probability}%">${p.team2_win_probability}%</div>
+        </div>
+        <div class="prob-row"><span>${p.team1}</span><span>${p.team2}</span></div>
+        <p style="margin-top:16px;color:#9898B0;font-size:13px;">
+            Historical Win Rate — ${p.team1}: ${p.team1_win_rate_historical}% | ${p.team2}: ${p.team2_win_rate_historical}%
+        </p>
+    `;
+    document.getElementById('result').style.display = 'block';
+}
+</script>
+</body>
+</html>
