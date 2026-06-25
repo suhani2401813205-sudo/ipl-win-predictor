@@ -2,121 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>IPL Win Predictor</title>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #E8E8F0; min-height: 100vh; padding: 40px 20px; }
-        .container { max-width: 600px; margin: 0 auto; }
-        h1 { text-align: center; margin-bottom: 8px; }
-        p.sub { text-align: center; color: #9898B0; margin-bottom: 30px; }
-        .form-card { background: #16161f; border-radius: 16px; padding: 24px; margin-bottom: 20px; }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; font-size: 13px; margin-bottom: 6px; color: #9898B0; }
-        select, input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #2a2a3d; background: #12121a; color: #E8E8F0; }
-        button { width: 100%; padding: 14px; background: #6C63FF; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; }
-        .result { display: none; background: #16161f; border-radius: 16px; padding: 24px; margin-top: 20px; }
-        .prob-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .prob-bar { height: 30px; background: #2a2a3d; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 16px; }
-        .prob-fill1 { background: #6C63FF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
-        .prob-fill2 { background: #00D4AA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Win Predictor — ML Based Match Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
 </head>
 <body>
-<div class="container">
-    <h1>🏏 IPL Win Predictor</h1>
-    <p class="sub">ML-based match outcome prediction</p>
 
-    <div class="form-card">
-        <div class="form-group">
-            <label>Team 1</label>
-            <select id="team1">
-                <option>Mumbai Indians</option>
-                <option>Chennai Super Kings</option>
-                <option>Royal Challengers Bengaluru</option>
-                <option>Kolkata Knight Riders</option>
-                <option>Sunrisers Hyderabad</option>
-                <option>Punjab Kings</option>
-                <option>Delhi Capitals</option>
-                <option>Rajasthan Royals</option>
-                <option>Gujarat Titans</option>
-                <option>Lucknow Super Giants</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Team 2</label>
-            <select id="team2">
-                <option>Chennai Super Kings</option>
-                <option>Mumbai Indians</option>
-                <option>Royal Challengers Bengaluru</option>
-                <option>Kolkata Knight Riders</option>
-                <option>Sunrisers Hyderabad</option>
-                <option>Punjab Kings</option>
-                <option>Delhi Capitals</option>
-                <option>Rajasthan Royals</option>
-                <option>Gujarat Titans</option>
-                <option>Lucknow Super Giants</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Venue</label>
-            <input type="text" id="venue" value="Wankhede Stadium" placeholder="e.g. Wankhede Stadium">
-        </div>
-        <div class="form-group">
-            <label>Toss Winner</label>
-            <select id="toss_winner">
-                <option>Mumbai Indians</option>
-                <option>Chennai Super Kings</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Toss Decision</label>
-            <select id="toss_decision">
-                <option value="field">Field</option>
-                <option value="bat">Bat</option>
-            </select>
-        </div>
-        <button onclick="predict()">Predict Winner</button>
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn">
+    <i class="fa-solid fa-moon" id="theme-icon"></i>
+</button>
+
+<div class="hero">
+    <div class="hero-badge"><i class="fa-solid fa-chart-line"></i> ML Powered Prediction</div>
+    <h1><i class="fa-solid fa-cricket-bat-ball"></i> IPL Win Predictor</h1>
+    <p>Machine Learning based match outcome prediction using historical team performance, head-to-head records and venue data.</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><div class="num">1187</div><div class="label">Matches Analyzed</div></div>
+        <div class="hero-stat"><div class="num">14</div><div class="label">Teams</div></div>
+        <div class="hero-stat"><div class="num">~50%</div><div class="label">CV Accuracy</div></div>
+        <div class="hero-stat"><div class="num">LR</div><div class="label">Algorithm</div></div>
     </div>
-
-    <div class="result" id="result"></div>
 </div>
 
-<script>
-async function predict() {
-    const team1 = document.getElementById('team1').value;
-    const team2 = document.getElementById('team2').value;
+<div class="container">
 
-    if (team1 === team2) {
-        alert('Team 1 and Team 2 cannot be the same! Please select different teams.');
-        return;
-    }
+    <div class="form-card">
+        <div class="form-title"><i class="fa-solid fa-bolt"></i> <span>Predict Match Outcome</span></div>
 
-    const venue = document.getElementById('venue').value;
-    const toss_winner = document.getElementById('toss_winner').value;
-    const toss_decision = document.getElementById('toss_decision').value;
+        <div class="form-grid">
+            <div class="form-group">
+                <label><i class="fa-solid fa-shield-halved"></i> Team 1</label>
+                <select id="team1">
+                    <option>Mumbai Indians</option>
+                    <option>Chennai Super Kings</option>
+                    <option>Royal Challengers Bengaluru</option>
+                    <option>Kolkata Knight Riders</option>
+                    <option>Sunrisers Hyderabad</option>
+                    <option>Punjab Kings</option>
+                    <option>Delhi Capitals</option>
+                    <option>Rajasthan Royals</option>
+                    <option>Gujarat Titans</option>
+                    <option>Lucknow Super Giants</option>
+                </select>
+            </div>
 
-    const response = await fetch('/predict', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({team1, team2, venue, toss_winner, toss_decision})
-    });
+            <div class="form-group">
+                <label><i class="fa-solid fa-shield-halved"></i> Team 2</label>
+                <select id="team2">
+                    <option>Chennai Super Kings</option>
+                    <option>Mumbai Indians</option>
+                    <option>Royal Challengers Bengaluru</option>
+                    <option>Kolkata Knight Riders</option>
+                    <option>Sunrisers Hyderabad</option>
+                    <option>Punjab Kings</option>
+                    <option>Delhi Capitals</option>
+                    <option>Rajasthan Royals</option>
+                    <option>Gujarat Titans</option>
+                    <option>Lucknow Super Giants</option>
+                </select>
+            </div>
 
-    const data = await response.json();
-    const p = data.prediction;
+            <div class="form-group full">
+                <label><i class="fa-solid fa-location-dot"></i> Venue</label>
+                <input type="text" id="venue" value="Wankhede Stadium" placeholder="e.g. Wankhede Stadium">
+            </div>
 
-    document.getElementById('result').innerHTML = `
-        <h3>Prediction Result</h3>
-        <div class="prob-bar">
-            <div class="prob-fill1" style="width:${p.team1_win_probability}%">${p.team1_win_probability}%</div>
-            <div class="prob-fill2" style="width:${p.team2_win_probability}%">${p.team2_win_probability}%</div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-coins"></i> Toss Winner</label>
+                <select id="toss_winner">
+                    <option>Mumbai Indians</option>
+                    <option>Chennai Super Kings</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fa-solid fa-dice"></i> Toss Decision</label>
+                <select id="toss_decision">
+                    <option value="field">Field</option>
+                    <option value="bat">Bat</option>
+                </select>
+            </div>
         </div>
-        <div class="prob-row"><span>${p.team1}</span><span>${p.team2}</span></div>
-        <p style="margin-top:16px;color:#9898B0;font-size:13px;">
-            Historical Win Rate — ${p.team1}: ${p.team1_win_rate_historical}% | ${p.team2}: ${p.team2_win_rate_historical}%
+
+        <button class="btn-predict" onclick="predict()" id="btn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Winner
+        </button>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+        <p>Analyzing historical data<span class="loading-dots"></span></p>
+    </div>
+
+    <div class="error-msg" id="error"></div>
+
+    <div class="result" id="result"></div>
+
+    <div class="info-card">
+        <div class="info-title"><i class="fa-solid fa-circle-info"></i> About This Model</div>
+        <p class="info-text">
+            This predictor uses <strong>Logistic Regression</strong> trained on 1187 historical IPL matches (2008-2026).
+            Features include team win rate, head-to-head record, venue, and toss details.
+            Cross-validated accuracy is approximately 50%, reflecting the inherent unpredictability of T20 cricket —
+            even professional analytics systems rarely exceed 65-70% accuracy.
         </p>
-    `;
-    document.getElementById('result').style.display = 'block';
-}
-</script>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
