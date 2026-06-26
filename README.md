@@ -1,8 +1,8 @@
-# 🏏 IPL Win Predictor
+# IPL Win Predictor
 
 A machine learning project that predicts IPL match outcomes using Logistic Regression, trained on 1187 historical matches (2008-2026).
 
-🔗 **Live Demo:** https://ipl-win-predictor-3e7f.onrender.com
+ **Live Demo:** https://ipl-win-predictor-3e7f.onrender.com
 
 ## Overview
 
@@ -10,11 +10,11 @@ This project predicts the probability of either team winning an IPL match based 
 
 ## Features
 
-- 🏏 Select Team 1, Team 2, Venue, Toss Winner and Toss Decision
-- 📊 Get win probability for both teams
-- 📈 View historical win rate and head-to-head record
-- 🌓 Dark/Light theme toggle
-- ✅ Input validation (can't select the same team twice)
+- Select Team 1, Team 2, Venue, Toss Winner and Toss Decision
+- Get win probability for both teams
+- View historical win rate and head-to-head record
+- Dark/Light theme toggle
+- Input validation (can't select the same team twice)
 
 ## Tech Stack
 
@@ -100,4 +100,4 @@ cet-pravesh-ai/
 
 ## Author
 
-Suhani — 3rd Year BE Computer Engineering, VCET Vasai
+Suhani Joyashi — 3rd Year BE Computer Engineering, VCET Vasai
