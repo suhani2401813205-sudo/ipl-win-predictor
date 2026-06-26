@@ -110,3 +110,21 @@ function showError(msg) {
 function hideError() {
     document.getElementById('error').style.display = 'none';
 }
+
+function updateTossWinnerOptions() {
+    const team1 = document.getElementById('team1').value;
+    const team2 = document.getElementById('team2').value;
+    const tossWinnerSelect = document.getElementById('toss_winner');
+
+    tossWinnerSelect.innerHTML = `
+        <option value="${team1}">${team1}</option>
+        <option value="${team2}">${team2}</option>
+    `;
+}
+
+// Page load hone pe aur team change hone pe update karo
+document.getElementById('team1').addEventListener('change', updateTossWinnerOptions);
+document.getElementById('team2').addEventListener('change', updateTossWinnerOptions);
+
+// Initial load pe bhi call karo
+updateTossWinnerOptions();

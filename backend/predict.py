@@ -17,7 +17,7 @@ with open(os.path.join(BASE_DIR, 'model', 'encoder_final.pkl'), 'rb') as f:
 with open(os.path.join(BASE_DIR, 'model', 'df_for_predictions.pkl'), 'rb') as f:
     df = pickle.load(f)
 
-# Rare venues grouping ke liye list bana lo
+
 venue_counts = df['venue'].value_counts()
 rare_venues = venue_counts[venue_counts < 20].index.tolist()
 
