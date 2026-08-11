@@ -1,51 +1,49 @@
 /* IPL Win Predictor — Style Sheet */
-
 :root {
-    --bg: #F0F4FF;
+    --bg: #EAE0CF;
     --bg2: #FFFFFF;
-    --bg3: #E8EEFF;
+    --bg3: #DFD5C4;
     --card: #FFFFFF;
-    --card2: #F8F9FF;
-    --border: #E0E4F0;
-    --primary: #4F46E5;
-    --primary2: #6366F1;
-    --primary-light: #EEF2FF;
-    --accent: #059669;
-    --accent-light: #ECFDF5;
+    --card2: #F6F1E8;
+    --border: #C8BBA5;
+    --primary: #111844;
+    --primary2: #4B5694;
+    --primary-light: #E2E5FA;
+    --accent: #7288AE;
+    --accent-light: #EEF2F8;
     --amber: #D97706;
     --amber-light: #FFFBEB;
     --coral: #DC2626;
     --coral-light: #FEF2F2;
-    --text: #1E1B4B;
-    --text2: #6B7280;
-    --text3: #9CA3AF;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(79,70,229,0.06);
-    --shadow-hover: 0 4px 12px rgba(79,70,229,0.15), 0 8px 32px rgba(79,70,229,0.1);
+    --text: #111844;
+    --text2: #4B5694;
+    --text3: #7288AE;
+    --shadow: 0 1px 3px rgba(17,24,68,0.08), 0 4px 16px rgba(17,24,68,0.06);
+    --shadow-hover: 0 4px 12px rgba(17,24,68,0.15), 0 8px 32px rgba(17,24,68,0.1);
 }
 
 [data-theme="dark"] {
-    --bg: #0a0a0f;
-    --bg2: #12121a;
-    --bg3: #1a1a26;
-    --card: #16161f;
-    --card2: #1e1e2e;
-    --border: #2a2a3d;
-    --primary: #6C63FF;
-    --primary2: #8B85FF;
-    --primary-light: rgba(108,99,255,0.15);
-    --accent: #00D4AA;
-    --accent-light: rgba(0,212,170,0.1);
-    --amber: #FFB347;
-    --amber-light: rgba(255,179,71,0.1);
-    --coral: #FF6B6B;
-    --coral-light: rgba(255,107,107,0.1);
-    --text: #E8E8F0;
-    --text2: #9898B0;
-    --text3: #6b6b80;
-    --shadow: 0 1px 3px rgba(0,0,0,0.3);
-    --shadow-hover: 0 4px 20px rgba(108,99,255,0.2);
+    --bg: #0E1520;
+    --bg2: #141C2B;
+    --bg3: #1A263B;
+    --card: #141C2B;
+    --card2: #1D2A3F;
+    --border: #2A3B56;
+    --primary: #3B4A6B;
+    --primary2: #5B483B;
+    --primary-light: rgba(59,74,107,0.25);
+    --accent: #7288AE;
+    --accent-light: rgba(114,136,174,0.15);
+    --amber: #FBBF24;
+    --amber-light: rgba(251,191,36,0.1);
+    --coral: #FB7185;
+    --coral-light: rgba(251,113,133,0.1);
+    --text: #EAE0CF;
+    --text2: #93A0B8;
+    --text3: #6B7892;
+    --shadow: 0 1px 3px rgba(0,0,0,0.5);
+    --shadow-hover: 0 4px 20px rgba(14,21,32,0.4);
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition: background 0.3s, color 0.3s; }
 
