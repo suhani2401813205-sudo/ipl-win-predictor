@@ -61,7 +61,7 @@ body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:
 
 /* HERO */
 .hero {
-    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #818CF8 100%);
+    background: linear-gradient(135deg, #111844 100%, #6366F1 50%, #818CF8 100%);
     padding: 56px 20px 48px; text-align: center; position: relative; overflow: hidden;
 }
 [data-theme="dark"] .hero {
