@@ -69,7 +69,7 @@ This project was built iteratively, with each version improving on the last:
 [Kaggle — IPL Complete Dataset (2008-2026)](https://www.kaggle.com)
 
 ## Project Structure
-cet-pravesh-ai/
+ipl-win-predictor/
 
 ├── backend/
 
@@ -87,8 +87,11 @@ cet-pravesh-ai/
 
 ├── data/
 
-│   └── colleges.csv
-
+│   └── ipl_matches_final.csv
+    └──ipl_ball_by_ball.csv
+    └──ipl_matches.csv
+    └──ipl_matches_clean.csv
+    
 └── notebooks/             # Data cleaning/exploration notebooks
 
 ## Future Scope
